@@ -17,13 +17,13 @@ const NavigationList = props => {
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
-        <ListItemText primary="Ínicio" />
+        <ListItemText primary="Start" />
       </ListItem>
       <ListItem component={NavLink} exact to="/users/all" button>
         <ListItemIcon>
           <ListIcon />
         </ListItemIcon>
-        <ListItemText primary="Lista Usuários" />
+        <ListItemText primary="Users List" />
       </ListItem>
     </List>
   );

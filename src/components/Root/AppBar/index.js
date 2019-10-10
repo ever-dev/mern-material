@@ -1,46 +1,46 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import { ListItemIcon, ListItemText } from 'material-ui/List';
-import LogoutIcon from '@material-ui/icons/Input';
-import Avatar from '@material-ui/core/Avatar';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { withStyles } from "material-ui/styles";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import IconButton from "material-ui/IconButton";
+import Menu, { MenuItem } from "material-ui/Menu";
+import { ListItemIcon, ListItemText } from "material-ui/List";
+import LogoutIcon from "@material-ui/icons/Input";
+import Avatar from "@material-ui/core/Avatar";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
 
-import { logout } from '../../../services/users/actions';
+import { logout } from "../../../services/users/actions";
 
 const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'fixed',
+    position: "fixed"
   },
   flex: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
 class _AppBar extends Component {
   state = {
     anchorEl: null,
-    dialogOpen: false,
+    dialogOpen: false
   };
 
   handleLogout = () => {
     this.handleMenuClose();
     this.props.logout();
-  }
+  };
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -52,25 +52,32 @@ class _AppBar extends Component {
 
   handleToggleDialog = () => {
     this.setState(prevState => ({
-        dialogOpen: !prevState.dialogOpen,
-      })
-    )
-  }
-  
+      dialogOpen: !prevState.dialogOpen
+    }));
+  };
+
   render() {
     const { classes, user } = this.props;
     const { anchorEl } = this.state;
     const open = !!anchorEl;
 
     return (
-      <AppBar position="absolute" className={[classes.appBar, 'appBar'].join(' ')}>
+      <AppBar
+        position="absolute"
+        className={[classes.appBar, "appBar"].join(" ")}
+      >
         <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex} noWrap>
+          <Typography
+            variant="title"
+            color="inherit"
+            className={classes.flex}
+            noWrap
+          >
             CRUD
           </Typography>
           <div>
             <IconButton
-              aria-owns={open ? 'menu-appbar' : null}
+              aria-owns={open ? "menu-appbar" : null}
               aria-haspopup="true"
               onClick={this.handleMenu}
               color="inherit"
@@ -83,26 +90,32 @@ class _AppBar extends Component {
               onClose={this.handleMenuClose}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right"
               }}
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right"
               }}
               open={open}
             >
-              <MenuItem onClick={this.handleMenuClose} component={NavLink} to="/profile">
-                Perfil
+              <MenuItem
+                onClick={this.handleMenuClose}
+                component={NavLink}
+                to="/profile"
+              >
+                Profile
               </MenuItem>
-              <MenuItem onClick={() => {
-                this.handleMenuClose();
-                this.handleToggleDialog();
-              }}>
+              <MenuItem
+                onClick={() => {
+                  this.handleMenuClose();
+                  this.handleToggleDialog();
+                }}
+              >
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText primary="Sair" />
+                <ListItemText primary="Leave" />
               </MenuItem>
             </Menu>
           </div>
@@ -114,18 +127,20 @@ class _AppBar extends Component {
           aria-describedby="alert-dialog-description"
           disableEnforceFocus
         >
-          <DialogTitle id="alert-dialog-title">Tem certeza de que deseja sair?</DialogTitle>
+          <DialogTitle id="alert-dialog-title">
+            Are you sure you want to leave?
+          </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Continue mais um tempo com a gente, somos tão legais :)
+              Continue some more time with us, we are so cool :)
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleToggleDialog} color="primary">
-              Cancelar
+              Cancel
             </Button>
             <Button onClick={this.handleLogout} color="primary" autoFocus>
-              Sair mesmo assim
+              Leave anyway
             </Button>
           </DialogActions>
         </Dialog>
@@ -135,14 +150,17 @@ class _AppBar extends Component {
 }
 
 _AppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  user: state.user.data,
-})
+  user: state.user.data
+});
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { logout }),
+  connect(
+    mapStateToProps,
+    { logout }
+  )
 )(_AppBar);
