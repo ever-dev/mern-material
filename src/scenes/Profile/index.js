@@ -85,7 +85,7 @@ class Profile extends Component {
     axios
       .delete("/users/delete", config)
       .then(res => {
-        alert("Conta deletada com sucesso!");
+        alert("Account deleted successfully!");
         logout();
       })
       .catch(err => console.log(err));
@@ -118,7 +118,7 @@ class Profile extends Component {
         <form onSubmit={this.handleUpdate} className={classes.root}>
           {/* NAME */}
           <FormControl className={[classes.margin, classes.fill].join(" ")}>
-            <InputLabel htmlFor="input-name">Nome Completo</InputLabel>
+            <InputLabel htmlFor="input-name">Full name</InputLabel>
             <Input
               id="input-name"
               name="name"
@@ -143,7 +143,7 @@ class Profile extends Component {
               <DatePicker
                 keyboard
                 name="birthDate"
-                label="Data de nascimento"
+                label="Birth Date"
                 format="DD/MM/YYYY"
                 placeholder="15/03/1993"
                 mask={value =>

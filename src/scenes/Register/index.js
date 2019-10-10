@@ -193,7 +193,7 @@ class Login extends Component {
               </FormHelperText>
             )}
           </FormControl>
-          {/* DATA NASCIMENTO */}
+          {/* birth date */}
           <FormControl
             className={[classes.margin, classes.fill].join(" ")}
             error={
